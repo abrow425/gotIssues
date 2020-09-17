@@ -25,7 +25,7 @@ Then, type the command ```py -3.8 -m answerer```. This should run the script and
 
 The script will output a list of links that will answer issues that your puppets face. This list will appear in the same folder as you ran the script. To use these links, just go through the list, one by one, and open these links using the browser of your choice.
 
-Alternatively, the script will also output an "output.html" file. This provides a html file with a long list of buttons, each leading to the same links as in the file. This can be used in tandem with the provided NsDilemmaAutoClose to click the links by just pressing enter.
+Alternatively, the script will also output an "output.html" file. This provides a html file with a long list of buttons, each leading to the same links as in the file.
 
 ### License
 The original *gotIssues* script package by 9003 is licensed under the MIT License.
