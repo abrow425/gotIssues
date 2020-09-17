@@ -6,7 +6,7 @@
 // @description  Auto-close resolved dilemma windows
 // @author       dithpri
 // @noframes
-// @match        https://www.nationstates.net/page=enact_dilemma/*
+// @match        https://www.nationstates.net/container=*/page=enact_dilemma/*
 // @grant        window.close
 // @run-at       document-start
 // ==/UserScript==
