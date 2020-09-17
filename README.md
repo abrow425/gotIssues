@@ -19,13 +19,11 @@ priorities.csv makes a list of issue priorities. This enables you to ensure that
 To provide invaluable assistance to the maintainers of the Issues Spoiler List, a series of helpful priorities are provided in the priorities.csv file of this repository. Currently, these priorities are focused on gaining eligibility for the rare issue #1353; which requires you to have a one-child policy *and* prohibit abortion.
 
 ### Running
-To run the script, open command prompt (or terminal) to the folder where your puppets.csv and priorities.csv files are located. To do this on Windows, go to the folder, then shift+right click and press "open powershell window here". For Mac, follow [these steps](https://apple.stackexchange.com/questions/11323/how-can-i-open-a-terminal-window-directly-from-my-current-finder-location).
+To run the script, open command prompt (or terminal) to the folder where your puppets.csv and priorities.csv files are located. To do this on Windows, go to the folder, then shift+right click and press "open powershell window here". For Mac, follow [these steps](https://stackoverflow.com/questions/420456/open-terminal-here-in-mac-os-finder/7054045#7054045).
 
-Then, type the command ```py -3.8 -m answerer``` (again, mac users should do ```python3 -m answerer```). This should run the script and generate an output.txt file in the same folder; this folder has the links to answer your puppets' issues. 
+Then, type the command ```py -3.8 -m answerer``` (mac users should do ```python3 -m answerer```). This should run the script and generate both an output.txt file and an output.html file, in the same folder. These files have links, following which should answer your puppets' issues. 
 
-The script will output a list of links that will answer issues that your puppets face. This list will appear in the same folder as you ran the script. To use these links, just go through the list, one by one, and open these links using the browser of your choice.
-
-Alternatively, the script will also output an "output.html" file. This provides a html file with a long list of buttons, each leading to the same links as in the file.
+output.txt provides the links in a list format, while output.html provides a webpage with a series of button links.
 
 ### License
 The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
