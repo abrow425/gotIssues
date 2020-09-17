@@ -105,6 +105,8 @@ def generate_links():
     with open('./output.txt') as f:
         link_list = f.read().split('\n')
 
+    link_list = ['<tr><td><p><a target="_blank" href="'+lnk+'">Link to Issue</a></p></td></tr>\n' for lnk in link_list]
+
     links = """
     <html>
     <head>
@@ -140,9 +142,9 @@ def generate_links():
     """
 
     for link in link_list:
-        links += '<tr><td><p><a target="_blank" href="'+link+'">Link to Issue</a></p></td></tr>\n'
+        links = links + link
 
-    links += """<tr><td><p><a target="_blank" href="#">Done!</a></p></td></tr>
+    links = links + """<tr><td><p><a target="_blank" href="#">Done!</a></p></td></tr>
     </table>
     <script>
     document.querySelectorAll("td").forEach(function(el) {
