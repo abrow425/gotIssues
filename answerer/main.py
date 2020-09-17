@@ -88,7 +88,7 @@ def answer_issues():
                               f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/asnation={credentials[0]}"
                 else:
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
-                              f"dilemma={issue_id}/template-overall=none/nation={credentials[0]}/asnation={credentials[0]}"
+                              f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}"
 
                 with open("./output.txt", "a+") as file:
                     file.write(out_url)
