@@ -3,7 +3,7 @@ An even faster way to answer issues with python
 
 To install this script, you will need Python 3.8 and pip. Older versions of Python may work, however, compatibility is not guaranteed. *Run this with older versions of Python at your own risk!*
 
-To install pip check out this: https://www.liquidweb.com/kb/install-pip-windows/
+To install pip check out this: https://www.liquidweb.com/kb/install-pip-windows/.
 pip should automatically handle all dependencies, including *nspy_wrapper*.
 
 ### Setup
