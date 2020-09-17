@@ -85,7 +85,8 @@ def answer_issues():
 
                 if chosen_op != "!":
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
-                              f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/asnation={credentials[0]}"
+                              f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/" \
+                              f"nation={credentials[0]}/asnation={credentials[0]}"
                 else:
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
                               f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}"
@@ -106,9 +107,7 @@ def generate_links():
 
     puppets = list(filter(None, puppets))
 
-    links = open('output.html', 'w+')
-
-    links.write("""
+    links = """
     <html>
     <head>
     <style>
@@ -129,11 +128,6 @@ def generate_links():
         border-collapse: collapse;
         display: table-cell;
         max-width: 100%;
-        border: 1px solid darkorange;
-    }
-
-    tr, td {
-        border-bottom: 1px solid darkorange;
     }
 
     td p {
@@ -148,15 +142,14 @@ def generate_links():
     </head>
     <body>
     <table>
-    """)
+    """
 
     for k in puppets:
-        links.write('<tr>')
-        links.write(f'<td><p><a target="_blank" href="{k}">Link to Issue</a></p></td>')
-        links.write('</tr>\n')
+        links += f'<tr><td><p><a target="_blank" href="{k}">Link to Issue</a></p></td></tr>\n'
 
-    links.write('<td><p><a target="_blank" href="https://this-page-intentionally-left-blank.org/">Done!</a></p></td>')
-    links.write("""
+    links += '<tr><td><p><a target="_blank"' \
+             'href="https://this-page-intentionally-left-blank.org/">Done!</a></p></td></tr>'
+    links += """
     </table>
     <script>
     document.querySelectorAll("td").forEach(function(el) {
@@ -173,4 +166,7 @@ def generate_links():
     });
     </script>
     </body>
-    """)
+    """
+
+    with open("./output.html", "w+") as f:
+        f.write(links)
