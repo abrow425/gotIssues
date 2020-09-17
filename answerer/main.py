@@ -15,7 +15,7 @@
    limitations under the License.
 """
 
-import csv
+from csv import reader
 from nspywrapper import nsRequests
 from time import time
 from random import choice
@@ -40,7 +40,7 @@ def answer_issues():
     auth = []
     try:
         with open("./puppets.csv") as csv_file:
-            csv_reader = csv.reader(csv_file)
+            csv_reader = reader(csv_file)
             for row in csv_reader:
                 auth.append([row[0].replace(" ", "_"), row[1]])
     except (OSError, FileNotFoundError, IOError) as err:
@@ -50,7 +50,7 @@ def answer_issues():
     priorities = []
     try:
         with open("./priorities.csv") as csv_file:
-            csv_reader = csv.reader(csv_file)
+            csv_reader = reader(csv_file)
             for row in csv_reader:
                 priorities.append([row[0], row[1]])
     except (OSError, FileNotFoundError, IOError) as err:
@@ -85,10 +85,10 @@ def answer_issues():
 
                 if chosen_op != "!":
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
-                              f"choice-{chosen-op}=1/dilemma={issue_id}/nation={credentials[0]}/template-overall=none/asnation={credentials[0]}"
+                              f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/asnation={credentials[0]}"
                 else:
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
-                              f"dilemma={issue_id}/nation={credentials[0]}/template-overall=none/asnation={credentials[0]}"
+                              f"dilemma={issue_id}/template-overall=none/nation={credentials[0]}/asnation={credentials[0]}"
 
                 with open("./output.txt", "a+") as file:
                     file.write(out_url)
@@ -98,3 +98,79 @@ def answer_issues():
     e_time = time()
     r_time = e_time-s_time
     print("\nruntime: "+str(r_time)[:5]+" secs")
+
+
+def generate_links():
+    with open('output.txt') as f:
+        puppets = f.read().split('\n')
+
+    puppets = list(filter(None, puppets))
+
+    links = open('output.html', 'w+')
+
+    links.write("""
+    <html>
+    <head>
+    <style>
+    td.createcol p {
+        padding-left: 10em;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:visited {
+        color: grey;
+    }
+
+    table {
+        border-collapse: collapse;
+        display: table-cell;
+        max-width: 100%;
+        border: 1px solid darkorange;
+    }
+
+    tr, td {
+        border-bottom: 1px solid darkorange;
+    }
+
+    td p {
+        padding: 0.5em;
+    }
+
+    tr:hover {
+        background-color: lightgrey;
+    }
+
+    </style>
+    </head>
+    <body>
+    <table>
+    """)
+
+    for k in puppets:
+        links.write('<tr>')
+        links.write(f'<td><p><a target="_blank" href="{k}">Link to Issue</a></p></td>')
+        links.write('</tr>\n')
+
+    links.write('<td><p><a target="_blank" href="https://this-page-intentionally-left-blank.org/">Done!</a></p></td>')
+    links.write("""
+    </table>
+    <script>
+    document.querySelectorAll("td").forEach(function(el) {
+        el.addEventListener("click", function() {
+            let myidx = 0;
+            const row = el.parentNode;
+            let child = el;
+            while((child = child.previousElementSibling) != null) {
+                myidx++;
+            }
+            row.nextElementSibling.childNodes[myidx].querySelector("p > a").focus();
+            row.parentNode.removeChild(row);
+        });
+    });
+    </script>
+    </body>
+    """)
