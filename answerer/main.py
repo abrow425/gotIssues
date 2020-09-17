@@ -84,11 +84,11 @@ def answer_issues():
                     chosen_op = choice(issue_options)
 
                 if chosen_op != "!":
-                    out_url = f"https://www.nationstates.net/page=enact_dilemma/choice-{chosen_op}=1/dilemma={issue_id}/" \
-                              f"asnation={credentials[0]}/container={credentials[0]}/nation={credentials[0]}/\n"
+                    out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
+                              f"choice-{chosen-op}=1/dilemma={issue_id}/nation={credentials[0]}/template-overall=none/asnation={credentials[0]}"
                 else:
-                    out_url = f"https://www.nationstates.net/page=show_dilemma/dilemma={issue_id}/" \
-                              f"asnation={credentials[0]}/container={credentials[0]}/nation={credentials[0]}/\n"
+                    out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
+                              f"dilemma={issue_id}/nation={credentials[0]}/template-overall=none/asnation={credentials[0]}"
 
                 with open("./output.txt", "a+") as file:
                     file.write(out_url)
