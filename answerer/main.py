@@ -102,10 +102,8 @@ def answer_issues():
 
 
 def generate_links():
-    with open('output.txt') as f:
-        puppets = f.read().split('\n')
-
-    puppets = list(filter(None, puppets))
+    with open('./output.txt') as f:
+        link_list = f.read().split('\n')
 
     links = """
     <html>
@@ -128,14 +126,11 @@ def generate_links():
         border-collapse: collapse;
         display: table-cell;
         max-width: 100%;
+        background-color: lightgrey;
     }
 
     td p {
         padding: 0.5em;
-    }
-
-    tr:hover {
-        background-color: lightgrey;
     }
 
     </style>
@@ -144,12 +139,10 @@ def generate_links():
     <table>
     """
 
-    for k in puppets:
-        links += f'<tr><td><p><a target="_blank" href="{k}">Link to Issue</a></p></td></tr>\n'
+    for link in link_list:
+        links += '<tr><td><p><a target="_blank" href="'+link+'">Link to Issue</a></p></td></tr>\n'
 
-    links += '<tr><td><p><a target="_blank"' \
-             'href="https://this-page-intentionally-left-blank.org/">Done!</a></p></td></tr>'
-    links += """
+    links += """<tr><td><p><a target="_blank" href="#">Done!</a></p></td></tr>
     </table>
     <script>
     document.querySelectorAll("td").forEach(function(el) {
