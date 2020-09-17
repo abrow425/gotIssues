@@ -7,7 +7,7 @@ To install pip check out this: https://www.liquidweb.com/kb/install-pip-windows/
 pip should automatically handle all dependencies, including *nspy_wrapper*.
 
 ### Setup
-First, to install the script, open the command prompt and run ```py -3.8 -m pip install answerer```. 
+First, to install the script, open the command prompt and run ```py -3.8 -m pip install answerer``` Mac users should try ```python3 -m pip install answerer```. 
 
 To setup the script, you need to create a folder, like the "files" folder of this repository. It needs a puppets.csv file and a priorities.csv file.
 puppets.csv stores all the information for puppets that this script will handle. To setup puppets.csv, enter all your puppet names and passwords in the provided format.
@@ -21,7 +21,7 @@ To provide invaluable assistance to the maintainers of the Issues Spoiler List, 
 ### Running
 To run the script, open command prompt (or terminal) to the folder where your puppets.csv and priorities.csv files are located.
 
-Then, type the command ```py -3.8 -m answerer```. This should run the script and generate an output.txt file in the same folder; this folder has the links to answer your puppets' issues. 
+Then, type the command ```py -3.8 -m answerer``` (again, mac users should do ```python3 -m answerer```). This should run the script and generate an output.txt file in the same folder; this folder has the links to answer your puppets' issues. 
 
 The script will output a list of links that will answer issues that your puppets face. This list will appear in the same folder as you ran the script. To use these links, just go through the list, one by one, and open these links using the browser of your choice.
 
