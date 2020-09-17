@@ -19,7 +19,7 @@ priorities.csv makes a list of issue priorities. This enables you to ensure that
 To provide invaluable assistance to the maintainers of the Issues Spoiler List, a series of helpful priorities are provided in the priorities.csv file of this repository. Currently, these priorities are focused on gaining eligibility for the rare issue #1353; which requires you to have a one-child policy *and* prohibit abortion.
 
 ### Running
-To run the script, open command prompt (or terminal) to the folder where your puppets.csv and priorities.csv files are located.
+To run the script, open command prompt (or terminal) to the folder where your puppets.csv and priorities.csv files are located. To do this on Windows, go to the folder, then shift+right click and press "open powershell window here". For Mac, follow [these steps](https://apple.stackexchange.com/questions/11323/how-can-i-open-a-terminal-window-directly-from-my-current-finder-location).
 
 Then, type the command ```py -3.8 -m answerer``` (again, mac users should do ```python3 -m answerer```). This should run the script and generate an output.txt file in the same folder; this folder has the links to answer your puppets' issues. 
 
