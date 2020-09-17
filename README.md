@@ -1,5 +1,5 @@
 # gotIssues
-An even faster way to answer issues with python
+An easy-to-install version of https://github.com/jmikk/gotIssues.
 
 To install this script, you will need Python 3.8 and pip. Older versions of Python may work, however, compatibility is not guaranteed. *Run this with older versions of Python at your own risk!*
 
