@@ -34,7 +34,7 @@ def answer_issues():
     # setup
     main_nation_name = str(input("Name of your main nation: "))
     assert main_nation_name not in ("", " ", None)
-    nsapi = nsRequests("manual issue answering script-thing by SherpDaWerp, in use by " + main_nation_name)
+    nsapi = nsRequests("manual issue answering link generator script by SherpDaWerp, in use by " + main_nation_name)
 
     # import files
     auth = []
@@ -86,10 +86,10 @@ def answer_issues():
                 if chosen_op != "!":
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
                               f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/" \
-                              f"nation={credentials[0]}/asnation={credentials[0]}"
+                              f"nation={credentials[0]}/asnation={credentials[0]}\n"
                 else:
                     out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
-                              f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}"
+                              f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}\n"
 
                 with open("./output.txt", "a+") as file:
                     file.write(out_url)
