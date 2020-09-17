@@ -1,26 +1,28 @@
 # gotIssues
 An even faster way to answer issues with python
 
-You will need to install pip, lxml, beautifulsoup4, and requests.
+To install this script, you will need Python 3.8 and pip. Older versions of Python may work, however, compatibility is not guaranteed. *Run this with older versions of Python at your own risk!*
 
-if you need help installing pip check out this: https://www.liquidweb.com/kb/install-pip-windows/
-if you need help installing lxml, beautifulsoup4, and requests run the .bat file included in the hub here. 
+To install pip check out this: https://www.liquidweb.com/kb/install-pip-windows/
+pip should automatically handle all dependencies, including *nspy_wrapper*.
 
-then put your puppets in the csv file with all the names in the first column and passwords in the secound column. 
+### Setup
+First, to install the script, open the command prompt and run ```pip install answerer```. 
 
-Then run the issues.py program this will generate all of the links
-afterwards click the Sheet Maker.py to make the HTML sheet and spam enter to your hearts content. 
+To setup the script, you need to create a folder, like the "files" folder of this repository. It needs a puppets.csv file and a priorities.csv file.
+puppets.csv stores all the information for puppets that this script will handle. To setup puppets.csv, enter all your puppet names and passwords in the provided format.
 
+**DISCLAIMER**: I do not receive, see, obtain, or otherwise know about any information you put into this script. This can be verified by reading the source code of this application, as well as the source code of *nspy_wrapper*, available [here](https://github.com/abrow425/nspy_wrapper).
 
-Install the NsDilemmaAutoClose in tamper monkey (unless you already have it from Racoda's first issue answering scrpit)
+priorities.csv makes a list of issue priorities. This enables you to ensure that your puppets all choose certain options of issues (provided those options are available to them). To setup priorities.csv, enter the id of the priority issue and the option id that your puppets should choose (separated by a comma). A full list of all known issues and their options is available [here](https://forum.nationstates.net/viewtopic.php?f=13&t=88). Keep in mind that option IDs start at 0. Additionally; to highlight an issue for manual attention, input the id of the issue and "!" as the option id.
 
-DISCLAIMER 
-TL;DR: READ THIS, read the rules ask for help if you need help understanding scripts, 
+To provide invaluable assistance to the maintainers of the Issues Spoiler List, a series of helpful priorities are provided in the priorities.csv file of this repository. Currently, these priorities are focused on gaining eligibility for the rare issue #1363 (or #1367, I'm not sure); which requires you to have a one-child policy *and* prohibit abortion.
 
-YOU A HUMAN MUST PUSH A BUTTON TO DO AN EVENT. 
+### Running
+To run the script, open command prompt (or terminal) to the folder where your puppets.csv and priorities.csv files are located.
 
-All scripts used for Nationstates should be used at the users own risk. Even the most legal of scripts can be run improperly and thus become illegal. Please make sure you read any code that you use or put your nation's name into as a user agent. Do not use any code that was given to you by people you do not know or trust even if it is created by someone you know. If you do not know how to read code talk with the developer of the code to make sure that you understand what the code is doing it is your responsibility to abide by scripting rules. And you should read them they are located here (https://forum.nationstates.net/viewtopic.php?p=16394966#p16394966). 
+Then, type the command ```py -3.8 -m answerer```. This should run the script and generate an output.txt file in the same folder; this folder has the links to answer your puppets' issues. 
 
-With many farming scripts it is important to remember you need to press the key yourself to trigger all events this means you can not just hold the button down. You also can not out a rock or other object on the key to press the button for you. 
-
-YOU A HUMAN MUST PUSH A BUTTON TO DO AN EVENT.
+### License
+The original *gotIssues* script package by 9003 is licensed under the MIT License.
+The modified script package (known as *answerer*) by SherpDaWerp is licensed under the Apache License 2.0.
