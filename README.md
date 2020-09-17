@@ -28,5 +28,5 @@ The script will output a list of links that will answer issues that your puppets
 Alternatively, the script will also output an "output.html" file. This provides a html file with a long list of buttons, each leading to the same links as in the file.
 
 ### License
-The original *gotIssues* script package by 9003 is licensed under the MIT License.<br>
+The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
 The modified script package (known as *answerer*) by SherpDaWerp is licensed under the Apache License 2.0.
