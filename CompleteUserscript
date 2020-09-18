@@ -1,0 +1,20 @@
+// ==UserScript==
+// @name         FastIssueProcessor
+// @namespace    https://github.com/abrow425/gotIssues
+// @version      0.0.1
+// @description  closes unwanted issue pages and highlights available packs
+// @author       SherpDaWerp
+// @match        https://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
+// @grant        window.close
+// ==/UserScript==
+
+
+// Your code here...
+(function() {
+    'use strict';
+    if(document.getElementsByClassName("button lootboxbutton").length > 0){
+        document.getElementsByClassName("button lootboxbutton")[0].focus();
+    }
+    else
+    {window.close()};
+})();
