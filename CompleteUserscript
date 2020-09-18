@@ -5,6 +5,7 @@
 // @description  closes unwanted issue pages and highlights available packs
 // @author       SherpDaWerp
 // @match        https://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
+// @match        */issue_link_output.html
 // @grant        window.close
 // ==/UserScript==
 
