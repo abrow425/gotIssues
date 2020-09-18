@@ -27,6 +27,8 @@ Then, type the command ```py -3.8 -m answerer``` (mac users should do ```python3
 
 output.txt provides the links in a list format, while output.html provides a webpage with a series of button links.
 
+If you want to speed up the process of output.html; add the provided userscript (*CompleteUserscript*) to your browser using your extension of choice, be it Tampermonkey, Greasemonkey, or whatever else. 
+
 ### License
 The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
 The modified script package (known as *answerer*) by SherpDaWerp is licensed under the Apache License 2.0.
