@@ -16,25 +16,26 @@
 """
 
 from csv import reader
-from nspywrapper import nsRequests
 from time import time
 from random import choice
-# from selenium.webdriver import Firefox
-# from selenium.webdriver.firefox.options import Options
-# from bs4 import BeautifulSoup
 
-__browser__ = False
+from nspywrapper import nsRequests
+
 ALLOWABLE = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
              "12", "13", "14", "15", "16", "17", "18", "19", "20", "!")
 
 
 def answer_issues():
-    s_time = time()
+    if not __debug__:
+        s_time = time()
 
     # setup
     main_nation_name = str(input("Name of your main nation: "))
-    assert main_nation_name not in ("", " ", None)
-    nsapi = nsRequests("manual issue answering link generator script by SherpDaWerp, in use by " + main_nation_name)
+    if main_nation_name in ("", " ", None):
+        raise ValueError("Main nation name must be provided properly!")
+
+    nsapi = nsRequests("1:1 Issue Answering Script; "
+                       "created by SherpDaWerp, using nspy_wrapper. User is "+main_nation_name)
 
     # import files
     auth = []
@@ -57,55 +58,62 @@ def answer_issues():
         print("Oh no!")
         print(err)
 
+    # clear the output files
     with open("./output.txt", "w+") as file:
         file.write("")
 
     # actual code
     for credentials in auth:
         response = nsapi.nation(credentials[0], "issues", auth=(credentials[1], "", ""))
+
+        if not __debug__:
+            print(response)
+
         for issue in response.data["NATION"]["ISSUES"]:
             issue_id = issue["@id"]
             issue_options = [option["@id"] for option in issue["ISSUE"]["OPTIONS"]]
 
-            if __browser__:
+            chosen_op = None
+
+            p_id = [priority[0] for priority in priorities]
+            try:
+                index = p_id.index(issue_id)
+                if priorities[index][1] in issue_options:
+                    chosen_op = priorities[index][1]
+            except (ValueError, IndexError):
                 pass
+
+            if chosen_op is None or chosen_op not in ALLOWABLE:
+                chosen_op = choice(issue_options)
+
+            if chosen_op != "!" and issue_id not in (407, "407"):
+                out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
+                          f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/" \
+                          f"nation={credentials[0]}/asnation={credentials[0]}\n"
             else:
-                chosen_op = None
+                out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
+                          f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}\n"
 
-                p_id = [priority[0] for priority in priorities]
-                try:
-                    index = p_id.index(issue_id)
-                    if priorities[index][1] in issue_options:
-                        chosen_op = priorities[index][1]
-                except ValueError:
-                    pass
+            with open("./output.txt", "a+") as file:
+                file.write(out_url)
 
-                if chosen_op is None or chosen_op not in ALLOWABLE:
-                    chosen_op = choice(issue_options)
-
-                if chosen_op != "!":
-                    out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
-                              f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/" \
-                              f"nation={credentials[0]}/asnation={credentials[0]}\n"
-                else:
-                    out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
-                              f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}\n"
-
-                with open("./output.txt", "a+") as file:
-                    file.write(out_url)
+        with open("./output.txt", "a+") as file:
+            file.write("\n")
 
         print(credentials[0])
 
-    e_time = time()
-    r_time = e_time-s_time
-    print("\nruntime: "+str(r_time)[:5]+" secs")
+    if not __debug__:
+        e_time = time()
+        r_time = e_time-s_time
+        print("\nruntime: "+str(r_time)[:5]+" secs")
 
 
 def generate_links():
     with open('./output.txt') as f:
         link_list = f.read().split('\n')
 
-    link_list = ['<tr><td><p><a target="_blank" href="'+lnk+'">Link to Issue</a></p></td></tr>\n' for lnk in link_list]
+    link_list = ['<tr><td><p><a target="_blank" '
+                 'class="issue-answer-button" href="'+lnk+'">Link to Issue</a></p></td></tr>\n' for lnk in link_list]
 
     links = """
     <html>
@@ -163,5 +171,5 @@ def generate_links():
     </body>
     """
 
-    with open("./output.html", "w+") as f:
+    with open("./issue_link_output.html", "w+") as f:
         f.write(links)
