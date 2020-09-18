@@ -29,6 +29,9 @@ output.txt provides the links in a list format, while output.html provides a web
 
 If you want to speed up the process of output.html; add the provided userscript (*CompleteUserscript*) to your browser using your extension of choice, be it Tampermonkey, Greasemonkey, or whatever else. 
 
+**ANOTHER, MORE IMPORTANT DISCLAIMER**: This userscript needs to match on local files in order to work. This requires changing your browser settings to allow this functionality. 
+The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this because I'm not doing it; you can read the entire source of the provided *CompleteUserscript* to verify - but if you turn this setting on, you are creating and accepting that risk. *BEWARE!*
+
 ### License
 The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
 The modified script package (known as *answerer*) by SherpDaWerp is licensed under the Apache License 2.0.
