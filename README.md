@@ -16,8 +16,6 @@ puppets.csv stores all the information for puppets that this script will handle.
 
 priorities.csv makes a list of issue priorities. This enables you to ensure that your puppets all choose certain options of issues (provided those options are available to them). To setup priorities.csv, enter the id of the priority issue and the option id that your puppets should choose (separated by a comma). A full list of all known issues and their options is available [here](https://forum.nationstates.net/viewtopic.php?f=13&t=88). Keep in mind that option IDs start at 0. Additionally; to highlight an issue for manual attention, input the id of the issue and "!" as the option id.
 
-**IMPORTANT**: Currently, this script relies on the Priority system to answer Issue #407. This issue is unique and does not have any options, so the only way forward is dismissing it. *You must enter the priority* "407,!" *in order to make sure the script can handle Issue #407!*
-
 To provide invaluable assistance to the maintainers of the Issues Spoiler List, a series of helpful priorities are provided in the priorities.csv file of this repository. Currently, these priorities are focused on gaining eligibility for the rare issue #1353; which requires you to have a one-child policy *and* prohibit abortion.
 
 ### Running
