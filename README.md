@@ -7,8 +7,8 @@ To install pip check out this: https://www.liquidweb.com/kb/install-pip-windows/
 pip should automatically handle all dependencies, including *nspy_wrapper*.
 
 ## the latest version of *answerer* is non-functional by design when using output.html.
-Additionally, output.txt now stores (indefinitely, though this will change to temporary storage as part of the rework) autologin tokens for all your nations, causing potential security risks. Using *answerer* v1.0.3 is not recommended at this time. This is to ensure compliance with [this rule](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553). The end result will be output.txt becoming non-functional and output.html being the only way to answer use this script, with built-in scripting to ensure simultaneity is enforced.
-
+Additionally, output.txt now stores (indefinitely, though this will change to temporary storage as part of the rework) autologin tokens for all your nations, causing potential security risks. Using *answerer* v1.0.3 is not recommended at this time. <br>
+The rework is to ensure compliance with [this rule](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553). The end result will be output.txt becoming non-functional and output.html being the only way to answer use this script, with built-in scripting to ensure simultaneity is enforced.<br>
 **If you want updates on my progress with *answerer*, join the [NS Cards Discord](https://discord.gg/yn5a4p9) and keep a watch in #script-help!**
 
 ### Setup
