@@ -6,9 +6,10 @@ To install this script, you will need Python 3.8 and pip. Older versions of Pyth
 To install pip check out this: https://www.liquidweb.com/kb/install-pip-windows/.
 pip should automatically handle all dependencies, including *nspy_wrapper*.
 
-## the latest version of *answerer* is non-functional by design when using either output.txt or output.html. This is to ensure compliance with [this rule](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553). The end result will be output.txt remaining non-functional and output.html being the only way to answer use this script, with built-in scripting to ensure simultaneity is enforced.
+## the latest version of *answerer* is non-functional by design when using output.html.
+Additionally, output.txt now stores (indefinitely, though this will change to temporary storage as part of the rework) autologin tokens for all your nations, causing potential security risks. Using *answerer* v1.0.3 is not recommended at this time. This is to ensure compliance with [this rule](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553). The end result will be output.txt becoming non-functional and output.html being the only way to answer use this script, with built-in scripting to ensure simultaneity is enforced.
 
-## If you want updates on my progress with *answerer*, join the [NS Cards Discord](https://discord.gg/yn5a4p9) and keep a watch in #script-help!
+**If you want updates on my progress with *answerer*, join the [NS Cards Discord](https://discord.gg/yn5a4p9) and keep a watch in #script-help!**
 
 ### Setup
 First, to install the script, open the command prompt and run ```py -3.8 -m pip install answerer``` Mac users should try ```python3 -m pip install answerer```. 
