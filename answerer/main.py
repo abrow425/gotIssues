@@ -148,7 +148,7 @@ def generate_links():
         for out in link_list:
             print(out)
 
-    link_list_arr = [link.split("|") for link in link_list]
+    link_list_arr = [link.split("|") for link in link_list[:-1]]
 
     if not __debug__:
         print("\nlinks arr")
@@ -215,9 +215,10 @@ def generate_links():
     function fn_answer(url, token, nation) {
         /*  somehow, open the provided url with a cookie.
             name = "autologin"
-            value = nation + "=" + token
-            domain = .nationstates.net
+            value = nation.concat("=", token)
+            domain = ".nationstates.net"
         */
+        
         return;
     }
     </script>
