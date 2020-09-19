@@ -21,8 +21,76 @@ from random import choice
 
 from nspywrapper import nsRequests
 
+# constant - list of allowable issue option decisions.
 ALLOWABLE = ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
              "12", "13", "14", "15", "16", "17", "18", "19", "20", "!")
+
+# reading files
+auth = []
+try:
+    with open("./puppets.csv") as csv_file:
+        csv_reader = reader(csv_file)
+        for row in csv_reader:
+            auth.append([row[0].replace(" ", "_"), row[1]])
+except (OSError, FileNotFoundError, IOError) as err:
+    print("Oh no!")
+    print(err)
+
+priorities = []
+try:
+    with open("./priorities.csv") as csv_file:
+        csv_reader = reader(csv_file)
+        for row in csv_reader:
+            priorities.append([row[0], row[1]])
+            p_id = [priority[0] for priority in priorities]
+except (OSError, FileNotFoundError, IOError) as err:
+    print("Oh no!")
+    print(err)
+
+
+def handle_issue(issue, credentials):
+    chosen_op = None
+    issue_id = issue["@id"]
+
+    # 407 fix - if there aren't any options, then choose ! (manual attention flag)
+    try:
+        issue_options = [option["@id"] for option in issue["ISSUE"]["OPTIONS"]]
+    except KeyError:
+        chosen_op = "!"
+        issue_options = [""]
+
+    # option deciding bit. check if the issue has a priority, then check if that priority option
+    # is available to choose
+    try:
+        index = p_id.index(issue_id)
+
+        if priorities[index][1] in issue_options:
+            chosen_op = priorities[index][1]
+    except (ValueError, IndexError):
+        pass
+
+    # if an option hasn't been chosen yet (or an invalid option has been chosen) then choose from available
+    # options and ignore the priority system.
+    if chosen_op is None or chosen_op not in ALLOWABLE:
+        chosen_op = choice(issue_options)
+
+    out_url = write_links(chosen_op, issue_id, credentials)
+
+    with open("./output.txt", "a+") as file:
+        file.write(out_url)
+
+
+def write_links(chosen_op, issue_id, credentials):
+    if chosen_op != "!" and issue_id != "407":
+        out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
+                  f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/" \
+                  f"asnation={credentials[0]}|{credentials[2]}|{credentials[0]}"
+    else:
+        out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
+                  f"dilemma={issue_id}/nation={credentials[0]}" \
+                  f"/asnation={credentials[0]}|{credentials[2]}|{credentials[0]}"
+
+    return out_url
 
 
 def answer_issues():
@@ -37,27 +105,6 @@ def answer_issues():
     nsapi = nsRequests("1:1 Issue Answering Script; "
                        "created by SherpDaWerp, using nspy_wrapper. User is "+main_nation_name)
 
-    # import files
-    auth = []
-    try:
-        with open("./puppets.csv") as csv_file:
-            csv_reader = reader(csv_file)
-            for row in csv_reader:
-                auth.append([row[0].replace(" ", "_"), row[1]])
-    except (OSError, FileNotFoundError, IOError) as err:
-        print("Oh no!")
-        print(err)
-
-    priorities = []
-    try:
-        with open("./priorities.csv") as csv_file:
-            csv_reader = reader(csv_file)
-            for row in csv_reader:
-                priorities.append([row[0], row[1]])
-    except (OSError, FileNotFoundError, IOError) as err:
-        print("Oh no!")
-        print(err)
-
     # clear the output files
     with open("./output.txt", "w+") as file:
         file.write("")
@@ -65,37 +112,19 @@ def answer_issues():
     # actual code
     for credentials in auth:
         response = nsapi.nation(credentials[0], "issues", auth=(credentials[1], "", ""))
+        credentials.append(response.get_auth()[0])
 
         if not __debug__:
-            print(response)
+            print(response.data)
 
-        for issue in response.data["NATION"]["ISSUES"]:
-            issue_id = issue["@id"]
-            issue_options = [option["@id"] for option in issue["ISSUE"]["OPTIONS"]]
-
-            chosen_op = None
-
-            p_id = [priority[0] for priority in priorities]
-            try:
-                index = p_id.index(issue_id)
-                if priorities[index][1] in issue_options:
-                    chosen_op = priorities[index][1]
-            except (ValueError, IndexError):
-                pass
-
-            if chosen_op is None or chosen_op not in ALLOWABLE:
-                chosen_op = choice(issue_options)
-
-            if chosen_op != "!" and issue_id not in (407, "407"):
-                out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
-                          f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/" \
-                          f"nation={credentials[0]}/asnation={credentials[0]}\n"
-            else:
-                out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
-                          f"dilemma={issue_id}/nation={credentials[0]}/asnation={credentials[0]}\n"
-
-            with open("./output.txt", "a+") as file:
-                file.write(out_url)
+        if type(response.data["NATION"]["ISSUES"]) is list:     # multiple issues
+            for issue in response.data["NATION"]["ISSUES"]:
+                handle_issue(issue, credentials)
+        elif response.data["NATION"]["ISSUES"] == {}:           # no issues
+            pass
+        else:                                                   # single issue
+            issue = response.data["NATION"]["ISSUES"]["ISSUE"]
+            handle_issue(issue, credentials)
 
         with open("./output.txt", "a+") as file:
             file.write("\n")
@@ -110,10 +139,13 @@ def answer_issues():
 
 def generate_links():
     with open('./output.txt') as f:
-        link_list = f.read().split('\n')
+        link_list = f.read().split("\n")
 
-    link_list = ['<tr><td><p><a target="_blank" '
-                 'class="issue-answer-button" href="'+lnk+'">Link to Issue</a></p></td></tr>\n' for lnk in link_list]
+    link_list_arr = [link.split("|") for link in link_list]
+
+    link_list = ['<tr><td><button class="issue-answer-button onclick=fn_answer('
+                 ''+lnk[0]+','+lnk[1]+','+lnk[2]+''
+                 ')>Link to Issue</button></td></tr>\n' for lnk in link_list_arr]
 
     links = """
     <html>
@@ -167,6 +199,15 @@ def generate_links():
             row.parentNode.removeChild(row);
         });
     });
+    
+    function fn_answer(url, token, nation) {
+        /*  somehow, open the provided url with a cookie.
+            name = "autologin"
+            value = nation + "=" + token
+            domain = .nationstates.net
+        */
+        return;
+    }
     </script>
     </body>
     """
