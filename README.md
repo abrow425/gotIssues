@@ -23,11 +23,11 @@ To run the script, open command prompt (or terminal) to the folder where your pu
 
 Then, type the command ```py -3.8 -m answerer``` (mac users should do ```python3 -m answerer```). This should run the script and generate both an output.txt file and an output.html file, in the same folder. These files have links, following which should answer your puppets' issues. 
 
-output.txt provides the links in a list format, while output.html provides a webpage with a series of button links.
+output.txt provides the links in a list format, while output.html provides a webpage with a series of button links. output.html is currently non-functional while I work to ensure it remains compliant with [this ruling by [violet]](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553).
 
 If you want to speed up the process of output.html; add the provided userscript (*CompleteUserscript*) to your browser using your extension of choice, be it Tampermonkey, Greasemonkey, or whatever else. 
 
-**ANOTHER, MORE IMPORTANT DISCLAIMER**: This userscript needs to match on local files in order to work. This requires changing your browser settings ([tutorials for Greasemonkey and Tampermonkey here](https://stackoverflow.com/questions/9931115/run-greasemonkey-on-html-files-located-on-the-local-filesystem)) to allow this functionality. The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this because I'm not doing it; you can read the entire source of the provided *CompleteUserscript* to verify - but if you turn this setting on, you are creating and accepting that risk. *BEWARE!*
+**ANOTHER, MORE IMPORTANT DISCLAIMER**: This userscript needs to match on local files in order to work. This requires changing your browser settings ([tutorials for Greasemonkey and Tampermonkey here](https://stackoverflow.com/questions/9931115/run-greasemonkey-on-html-files-located-on-the-local-filesystem)) to allow this functionality. The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this *because I'm **not** doing it*; you can read the entire source of the provided *CompleteUserscript* to verify - but if you turn this setting on, you are creating and accepting that risk. *BEWARE!*
 
 ### License
 The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
