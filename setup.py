@@ -3,14 +3,14 @@ from distutils.core import setup
 setup(
     name="answerer",
     packages=["answerer"],
-    version="1.0.2",
+    version="1.0.3",
     license="Apache",
-    description="A system that uses containers and scripts to answer issues at *high* speeds.",
+    description="A system that outputs a nice list of links to speed up issues answering.",
     long_description="See here for more information: https://github.com/abrow425/gotIssues",
     author="Andrew Brown (aka SherpDaWerp)",
     author_email="abrow425@gmail.com",
     url="https://github.com/abrow425/gotIssues",
-    download_url="https://github.com/abrow425/gotIssues/archive/v1.0.2.tar.gz",
+    download_url="https://github.com/abrow425/gotIssues/archive/v1.0.3.tar.gz",
     keywords=["NATIONSTATES", "NS", "API"],
     classifiers=[
         "Development Status :: 4 - Beta",
