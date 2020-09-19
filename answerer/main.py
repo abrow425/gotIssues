@@ -49,10 +49,14 @@ except (OSError, FileNotFoundError, IOError) as err:
 
 
 def handle_issue(issue, credentials):
+    if not __debug__:
+        print("\nissue")
+        print(issue)
+
     chosen_op = None
     issue_id = issue["@id"]
 
-    # 407 fix - if there aren't any options, then choose ! (manual attention flag)
+    # 407 fix - if there aren't any options, then choose option ! (manual attention flag)
     try:
         issue_options = [option["@id"] for option in issue["ISSUE"]["OPTIONS"]]
     except KeyError:
@@ -84,11 +88,11 @@ def write_links(chosen_op, issue_id, credentials):
     if chosen_op != "!" and issue_id != "407":
         out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
                   f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/" \
-                  f"asnation={credentials[0]}|{credentials[2]}|{credentials[0]}"
+                  f"asnation={credentials[0]}|{credentials[2]}|{credentials[0]}\n"
     else:
         out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
                   f"dilemma={issue_id}/nation={credentials[0]}" \
-                  f"/asnation={credentials[0]}|{credentials[2]}|{credentials[0]}"
+                  f"/asnation={credentials[0]}|{credentials[2]}|{credentials[0]}\n"
 
     return out_url
 
@@ -115,6 +119,7 @@ def answer_issues():
         credentials.append(response.get_auth()[0])
 
         if not __debug__:
+            print("\ndata")
             print(response.data)
 
         if type(response.data["NATION"]["ISSUES"]) is list:     # multiple issues
@@ -125,9 +130,6 @@ def answer_issues():
         else:                                                   # single issue
             issue = response.data["NATION"]["ISSUES"]["ISSUE"]
             handle_issue(issue, credentials)
-
-        with open("./output.txt", "a+") as file:
-            file.write("\n")
 
         print(credentials[0])
 
@@ -141,7 +143,17 @@ def generate_links():
     with open('./output.txt') as f:
         link_list = f.read().split("\n")
 
+    if not __debug__:
+        print("\nlinks")
+        for out in link_list:
+            print(out)
+
     link_list_arr = [link.split("|") for link in link_list]
+
+    if not __debug__:
+        print("\nlinks arr")
+        for out in link_list_arr:
+            print(out)
 
     link_list = ['<tr><td><button class="issue-answer-button onclick=fn_answer('
                  ''+lnk[0]+','+lnk[1]+','+lnk[2]+''
