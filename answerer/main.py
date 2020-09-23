@@ -88,11 +88,11 @@ def write_links(chosen_op, issue_id, credentials):
     if chosen_op != "!" and issue_id != "407":
         out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
                   f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/" \
-                  f"asnation={credentials[0]}\n"  # |{credentials[2]}|{credentials[0]}\n"
+                  f"asnation={credentials[0]}/t={credentials[2]}\n"  # |{credentials[0]}\n"
     else:
         out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
                   f"dilemma={issue_id}/nation={credentials[0]}" \
-                  f"/asnation={credentials[0]}\n"  # |{credentials[2]}|{credentials[0]}\n"
+                  f"/asnation={credentials[0]}/t={credentials[2]}\n"  # |{credentials[0]}\n"
 
     return out_url
 
