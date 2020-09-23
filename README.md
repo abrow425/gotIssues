@@ -27,7 +27,9 @@ Then, type the command ```py -3.8 -m answerer``` (mac users should do ```python3
 
 The output.txt file *should* be empty, as the **only supported method** of using this script is by the *issue_link_output.html* file *with* the *answerer_userscript* userscript installed. This is to ensure it remains compliant with [this ruling by [violet]](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553).
 
-**ANOTHER, MORE IMPORTANT SECURITY DISCLAIMER**: The userscript needs to match on local files in order to work. This requires changing your browser settings ([tutorials for Greasemonkey and Tampermonkey here](https://stackoverflow.com/questions/9931115/run-greasemonkey-on-html-files-located-on-the-local-filesystem)) to allow this functionality. The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this *because I'm **not** doing it*; you can read the entire source of the provided *answerer_userscript* to verify - but if you turn this setting on, you are creating and accepting that risk. *BEWARE!*
+**ANOTHER, MORE IMPORTANT SECURITY DISCLAIMER**: The userscript needs to match on local files in order to work. This requires changing your browser settings ([tutorials for Chrome and Firefox here](https://stackoverflow.com/questions/9931115/run-greasemonkey-on-html-files-located-on-the-local-filesystem)) to allow this functionality. The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this *because I'm **not** doing it*; you can read the entire source of the provided *answerer_userscript* to verify - but if you turn this setting on, you are creating and accepting that risk.
+
+To minimise the risk of malicious activity, ensure that you fully trust every active userscript you have installed *before* changing these settings.
 
 ### License
 The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
