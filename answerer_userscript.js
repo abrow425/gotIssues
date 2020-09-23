@@ -4,13 +4,13 @@
 // @version      0.0.1
 // @description  handles output.html links and enforces simultaneity
 // @author       SherpDaWerp
-// @include			 file:/*/issue_link_output.html*
-// @include			 https://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
-// @include			 http://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
-// @include			 https://www.nationstates.net/page=deck
-// @grant				 GM_setValue
-// @grant				 GM_getValue
-// @grant				 window.close
+// @include      file:/*/issue_link_output.html*
+// @include      https://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
+// @include      http://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
+// @include      https://www.nationstates.net/page=deck
+// @grant        GM_setValue
+// @grant        GM_getValue
+// @grant        window.close
 // ==/UserScript==
 
 function fn_answer(event) {
