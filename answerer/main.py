@@ -204,3 +204,5 @@ def generate_links():
 
     with open("./issue_link_output.html", "w+") as f:
         f.write(links)
+    with open("./output.txt", "w") as f:
+        f.write("")
