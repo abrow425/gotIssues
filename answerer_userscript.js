@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         answerer_script
 // @namespace    https://github.com/abrow425/gotIssues
-// @version      1.0
+// @version      0.0.1
 // @description  handles issue_link_output.html links and enforces simultaneity
 // @author       SherpDaWerp
 // @include      file:/*/issue_link_output.html*
@@ -12,20 +12,6 @@
 // @grant        GM.getValue
 // @grant        window.close
 // ==/UserScript==
-
-// function courtesy of https://gomakethings.com/getting-all-query-string-values-from-a-url-with-vanilla-js/
-var getParams = function (url) {
-	var params = {};
-	var parser = document.createElement('a');
-	parser.href = url;
-	var query = parser.search.substring(1);
-	var vars = query.split('&');
-	for (var i = 0; i < vars.length; i++) {
-		var pair = vars[i].split('=');
-		params[pair[0]] = decodeURIComponent(pair[1]);
-	}
-	return params;
-};
 
 async function fn_answer(event) {
   	console.log(await GM.getValue("answerer_is_ns_issue_tab_open"));
@@ -83,13 +69,8 @@ function handleIssueTab() {
         }
     } else {
         // script goes to login page.
-
-        var parameters = getParams(window.location.href)
-        nation_name = parameters["asnation"]
-        token = parameters["t"]
-
-        document.cookie = "autologin=".concat(encodeURIComponent(nation_name, "=", token));
-        location.reload();
+				
+      	return;
     }
 }
 
