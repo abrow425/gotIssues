@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         answerer_script
 // @namespace    https://github.com/abrow425/gotIssues
-// @version      0.0.1
+// @version      1.0
 // @description  handles issue_link_output.html links and enforces simultaneity
 // @author       SherpDaWerp
 // @include      file:/*/issue_link_output.html*
