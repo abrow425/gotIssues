@@ -88,11 +88,11 @@ def write_links(chosen_op, issue_id, credentials):
     if chosen_op != "!" and issue_id != "407":
         out_url = f"https://www.nationstates.net/container={credentials[0]}/page=enact_dilemma/" \
                   f"choice-{chosen_op}=1/dilemma={issue_id}/template-overall=none/nation={credentials[0]}/" \
-                  f"asnation={credentials[0]}|{credentials[2]}|{credentials[0]}\n"
+                  f"asnation={credentials[0]}\n"  # |{credentials[2]}|{credentials[0]}\n"
     else:
         out_url = f"https://www.nationstates.net/container={credentials[0]}/page=show_dilemma/" \
                   f"dilemma={issue_id}/nation={credentials[0]}" \
-                  f"/asnation={credentials[0]}|{credentials[2]}|{credentials[0]}\n"
+                  f"/asnation={credentials[0]}\n"  # |{credentials[2]}|{credentials[0]}\n"
 
     return out_url
 
@@ -155,13 +155,14 @@ def generate_links():
         for out in link_list_arr:
             print(out)
 
-    link_list = ['<tr><td><button class="issue-answer-button onclick=fn_answer('
-                 ''+lnk[0]+','+lnk[1]+','+lnk[2]+''
-                 ')>Link to Issue</button></td></tr>\n' for lnk in link_list_arr]
+    link_list = ['<tr><td><button class="issue-answer-button" value=\''+lnk[0]+'\''
+                 '>Link to Issue</button></td></tr>\n' for lnk in link_list_arr]
 
     links = """
-    <html>
+    <!DOCTYPE html>
+    <html lang="en">
     <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <style>
     td.createcol p {
         padding-left: 10em;
@@ -198,31 +199,7 @@ def generate_links():
 
     links = links + """<tr><td><p><a target="_blank" href="#">Done!</a></p></td></tr>
     </table>
-    <script>
-    document.querySelectorAll("td").forEach(function(el) {
-        el.addEventListener("click", function() {
-            let myidx = 0;
-            const row = el.parentNode;
-            let child = el;
-            while((child = child.previousElementSibling) != null) {
-                myidx++;
-            }
-            row.nextElementSibling.childNodes[myidx].querySelector("p > a").focus();
-            row.parentNode.removeChild(row);
-        });
-    });
-    
-    function fn_answer(url, token, nation) {
-        /*  somehow, open the provided url with a cookie.
-            name = "autologin"
-            value = nation.concat("=", token)
-            domain = ".nationstates.net"
-        */
-        
-        return;
-    }
-    </script>
-    </body>
+    </body></html>
     """
 
     with open("./issue_link_output.html", "w+") as f:
