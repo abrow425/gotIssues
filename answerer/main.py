@@ -128,7 +128,7 @@ def answer_issues():
         elif response.data["NATION"]["ISSUES"] == {}:           # no issues
             pass
         else:                                                   # single issue
-            issue = response.data["NATION"]["ISSUES"]["ISSUE"]
+            issue = response.data["NATION"]["ISSUES"]
             handle_issue(issue, credentials)
 
         print(credentials[0])
