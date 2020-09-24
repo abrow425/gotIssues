@@ -33,6 +33,18 @@ The userscript needs to match on local files in order to work. This requires cha
 
 To minimise the risk of malicious activity, ensure that you fully trust every active userscript you have installed *before* changing these settings.
 
+Once you have a fully generated *issue_link_output.html* file, and the *answerer_userscript* is installed (and working), follow the following process to answer all your issues!
+
+1. Open the *issue_link_output.html* file. You should see a popup asking whether you want your packs to auto-open, or whether you want to open the packs yourself - if you don't, *answerer_userscript* isn't correctly installed and working.
+2. click the topmost button.
+  a. If you have containers setup and working, the button should directly answer an issue
+  b. If you are running *answerer* without containers, you will see a login prompt - input the password for the puppet listed in the login box. (this goes directly to NS - not me!)
+3. If you get a pack, the script will highlight the "open pack" button so that pressing enter will open the pack. Otherwise, the page should immediately close once it loads.
+4. Once you click the "open pack" button (by pressing enter), either open all your packs or the script will open them for you. Once this is done, the page should immediately close.
+5. Once the page closes (either at step 3 or step 4), you can click the topmost button again! When a button opens a link, it removes itself from the page, so you don't have to worry about keeping track of where you were at.
+
+N.B. You *must* get to a point where the script will close the tab for you, otherwise you will be unable to progess. This system (keeping track of one tab at a time) ensures that you don't break the rule prohibiting script-assisted users from making simultaneous actions. If you find yourself outside this "cycle" of clicking the first button and potentially opening a pack, use your browser's "back" button to return to a point where you're in the cycle, and continue following the instructions.
+
 ### License
 The [original](https://github.com/jmikk/gotIssues) *gotIssues* script package by 9003 is licensed under the MIT License.<br>
 The modified script package (known as *answerer*) by SherpDaWerp is licensed under the Apache License 2.0.
