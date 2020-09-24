@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         answerer_script
 // @namespace    https://github.com/abrow425/gotIssues
-// @version      0.0.1
+// @version      1
 // @description  handles issue_link_output.html links and enforces simultaneity
 // @author       SherpDaWerp
 // @include      file:/*/issue_link_output.html*
@@ -109,7 +109,7 @@ function flipAllCards() {
       	// if on issue page, wait for page to load and add handleIssueTab() function.
 
       	window.addEventListener("load", handleIssueTab, false);
-    } else if (window.location.href.includes("https://www.nationstates.net/page=deck") && await GM.getValue("pack_to_be_opened") == "true") {
+    } else if (window.location.href.includes("https://www.nationstates.net/page=deck") && await GM.getValue("answerer_pack_to_be_opened") == "true") {
      	if (await GM.getValue("answerer_autoflip") == "true") {
      	    window.addEventListener("load", flipAllCards, false);
 
