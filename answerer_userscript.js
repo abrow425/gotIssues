@@ -6,8 +6,8 @@
 // @author       SherpDaWerp
 // @include      file:/*/issue_link_output.html*
 // @include      https://www.nationstates.net/container=*
-// @include			 https://www.nationstates.net/page=enact_dilemma/*
-// @include      https://www.nationstates.net/page=deck
+// @include	 https://www.nationstates.net/page=enact_dilemma/*
+// @include      https://www.nationstates.net/page=deck*
 // @grant        GM.setValue
 // @grant        GM.getValue
 // @grant				 GM_cookie
