@@ -36,9 +36,7 @@ To minimise the risk of malicious activity, ensure that you fully trust every ac
 Once you have a fully generated *issue_link_output.html* file, and the *answerer_userscript* is installed (and working), follow the following process to answer all your issues!
 
 1. Open the *issue_link_output.html* file. You should see a popup asking whether you want your packs to auto-open, or whether you want to open the packs yourself - if you don't, *answerer_userscript* isn't correctly installed and working.
-2. click the topmost button.
-    a. If you have containers setup and working, the button should directly answer an issue
-    b. If you are running *answerer* without containers, you will see a login prompt - input the password for the puppet listed in the login box. (this goes directly to NS - not me!)
+2. click the topmost button. If you have containers setup and working, the button should directly answer an issue. If you are running *answerer* without containers, you will see a login prompt - input the password for the puppet listed in the login box. (this goes directly to NS - not me!)
 3. If you get a pack, the script will highlight the "open pack" button so that pressing enter will open the pack. Otherwise, the page should immediately close once it loads.
 4. Once you click the "open pack" button (by pressing enter), either open all your packs or the script will open them for you. Once this is done, the page should immediately close.
 5. Once the page closes (either at step 3 or step 4), you can click the topmost button again! When a button opens a link, it removes itself from the page, so you don't have to worry about keeping track of where you were at.
