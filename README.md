@@ -14,7 +14,8 @@ First, to install the script, open the command prompt and run ```py -3.8 -m pip 
 To setup the script, you need to create a folder, like the "files" folder of this repository. It needs a puppets.csv file and a priorities.csv file.
 puppets.csv stores all the information for puppets that this script will handle. To setup puppets.csv, enter all your puppet names and passwords in the provided format.
 
-**SECURITY DISCLAIMER**: I do not receive, see, obtain, or otherwise know about any information you put into this script. This can be verified by reading the source code of this application, as well as the source code of *nspy_wrapper*, available [here](https://github.com/abrow425/nspy_wrapper).
+#### SECURITY DISCLAIMER ####
+I do not receive, see, obtain, or otherwise know about any information you put into this script. This can be verified by reading the source code of this application, as well as the source code of *nspy_wrapper*, available [here](https://github.com/abrow425/nspy_wrapper).
 
 priorities.csv makes a list of issue priorities. This enables you to ensure that your puppets all choose certain options of issues (provided those options are available to them). To setup priorities.csv, enter the id of the priority issue and the option id that your puppets should choose (separated by a comma). A full list of all known issues and their options is available [here](https://forum.nationstates.net/viewtopic.php?f=13&t=88). Keep in mind that option IDs start at 0. Additionally; to highlight an issue for manual attention, input the id of the issue and "!" as the option id.
 
@@ -27,7 +28,8 @@ Then, type the command ```py -3.8 -m answerer``` (mac users should do ```python3
 
 The output.txt file *should* be empty, as the **only supported method** of using this script is by the *issue_link_output.html* file *with* the *answerer_userscript* userscript installed. This is to ensure it remains compliant with [this ruling by [violet]](https://forum.nationstates.net/viewtopic.php?p=37664553#p37664553).
 
-**ANOTHER, MORE IMPORTANT SECURITY DISCLAIMER**: The userscript needs to match on local files in order to work. This requires changing your browser settings ([tutorials for Chrome and Firefox here](https://stackoverflow.com/questions/9931115/run-greasemonkey-on-html-files-located-on-the-local-filesystem)) to allow this functionality. The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this *because I'm **not** doing it*; you can read the entire source of the provided *answerer_userscript* to verify - but if you turn this setting on, you are creating and accepting that risk.
+#### ANOTHER, MORE IMPORTANT SECURITY DISCLAIMER ####
+The userscript needs to match on local files in order to work. This requires changing your browser settings ([tutorials for Chrome and Firefox here](https://stackoverflow.com/questions/9931115/run-greasemonkey-on-html-files-located-on-the-local-filesystem)) to allow this functionality. The setting defaults to off because there is the potential for a malicious userscript to open any of your local files (if this setting is on) and send them off to a malicious party. I'm explaining this *because I'm **not** doing it*; you can read the entire source of the provided *answerer_userscript* to verify - but if you turn this setting on, you are creating and accepting that risk.
 
 To minimise the risk of malicious activity, ensure that you fully trust every active userscript you have installed *before* changing these settings.
 
