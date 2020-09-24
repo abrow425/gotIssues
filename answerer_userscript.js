@@ -5,16 +5,31 @@
 // @description  handles issue_link_output.html links and enforces simultaneity
 // @author       SherpDaWerp
 // @include      file:/*/issue_link_output.html*
-// @include      https://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
-// @include      http://www.nationstates.net/container=*/page=enact_dilemma/choice-*=1/dilemma=*/template-overall=none/nation=*/asnation=*
+// @include      https://www.nationstates.net/container=*
+// @include			 https://www.nationstates.net/page=enact_dilemma/*
 // @include      https://www.nationstates.net/page=deck
 // @grant        GM.setValue
 // @grant        GM.getValue
+// @grant				 GM_cookie
 // @grant        window.close
 // ==/UserScript==
 
+
+function readURLParameters(pathname) {
+ 		var parameters = pathname.split("/");
+    var paramlist = {};
+
+    for (a = 1; a < parameters.length; a++) {
+        var paramsplit = parameters[a].split("=");
+
+        paramlist[paramsplit[0]] = paramsplit[1];
+    }
+
+  	return paramlist;
+}
+
+
 async function fn_answer(event) {
-  	console.log(await GM.getValue("answerer_is_ns_issue_tab_open"));
   	if (await GM.getValue("answerer_is_ns_issue_tab_open") == "true") {
       	alert("To enforce NationStates' simultaneity rules, you can only open one tab at a time using this script.");
     } else if (await GM.getValue("answerer_is_ns_issue_tab_open") == "false") {
@@ -24,10 +39,11 @@ async function fn_answer(event) {
 
       	var row = this.parentNode.parentNode;
       	row.parentNode.removeChild(row);
-
+      	
         window.open(url, "_blank");
     }
 }
+
 
 function addBtnFn() {
     var answer_btns = document.getElementsByClassName("issue-answer-button");
@@ -37,11 +53,13 @@ function addBtnFn() {
     }
 }
 
+
 function closeAndResetTab() {
   	GM.setValue("answerer_pack_to_be_opened", "false");
   	GM.setValue("answerer_is_ns_issue_tab_open", "false");
   	window.close();
 }
+
 
 function handleIssueTab() {
     if (document.getElementById("dlegislationbox") !== null) {
@@ -65,14 +83,15 @@ function handleIssueTab() {
             }, false);
         } else {
             // no packs, so close tab and allow another to be opened.
-            setTimeout(closeAndResetTab, 60000);
+            closeAndResetTab();
         }
     } else {
         // script goes to login page.
-				
+
       	return;
     }
 }
+
 
 function cardflipwaiter() {
   	var cards = document.getElementsByClassName("ready");
@@ -85,6 +104,7 @@ function cardflipwaiter() {
   	}
 }
 
+
 function flipAllCards() {
     var card_backs = document.getElementsByClassName("back")
 
@@ -93,9 +113,10 @@ function flipAllCards() {
     }
 }
 
+
 (async function() {
   	'use strict';
-
+  	
     if (window.location.href.includes("/issue_link_output.html")) {
       	// if on generated page, add fn_answer() to all buttons and notify the user that the script is ready to go.
       	GM.setValue("answerer_pack_to_be_opened", "false");
@@ -105,10 +126,6 @@ function flipAllCards() {
         addBtnFn();
       	var autoflip = window.confirm("answerer Userscript is loaded. Do you want any card packs to auto open (instead of manually clicking to flip them)?").toString();
         GM.setValue("answerer_autoflip", autoflip);
-    } else if (window.location.href.match("http.*\:\/\/www\.nationstates\.net\/container=.*\/page=enact_dilemma\/choice-.*=1\/dilemma=.*\/template-overall=none\/nation=.*\/asnation=.*")) {
-      	// if on issue page, wait for page to load and add handleIssueTab() function.
-
-      	window.addEventListener("load", handleIssueTab, false);
     } else if (window.location.href.includes("https://www.nationstates.net/page=deck") && await GM.getValue("answerer_pack_to_be_opened") == "true") {
      	if (await GM.getValue("answerer_autoflip") == "true") {
      	    window.addEventListener("load", flipAllCards, false);
@@ -119,5 +136,14 @@ function flipAllCards() {
 
           	setTimeout(closeAndResetTab, 2000);
         }
+    } else {
+			var params = readURLParameters(window.location.pathname);
+  		var param_keys = Object.keys(params);
+      
+      if (param_keys.includes("container") && param_keys.includes("page") && param_keys.includes("dilemma") && param_keys.includes("template-overall") && param_keys.includes("asnation")) {
+      	// if on issue page, wait for page to load and add handleIssueTab() function.
+
+      	window.addEventListener("load", handleIssueTab, false);
+      }
     }
 })();
