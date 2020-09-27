@@ -22,6 +22,5 @@ setup(
     ],
     install_requires=[
         "nspy_wrapper",
-        "urllib3",
     ],
 )
